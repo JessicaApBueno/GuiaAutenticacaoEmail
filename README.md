@@ -18,6 +18,10 @@ Design Responsivo: Interface totalmente adaptável para visualização em deskto
 
 Navegação Intuitiva: Uma barra de navegação fixa e links internos que facilitam o acesso a todas as seções do guia.
 
+
+https://github.com/user-attachments/assets/d0d5b43f-fdd6-4d3e-aae8-4d54a559bfe9
+
+
 ## 🎨 Layout
 O design do site foi pensado para ser moderno e limpo, utilizando uma paleta de cores escuras que favorece a leitura e destaca os pontos mais importantes do conteúdo.
 
@@ -49,5 +53,6 @@ O conteúdo técnico deste guia foi elaborado com base na documentação oficial
 
 ## ✍️ Autora
 Este projeto foi desenvolvido com ❤️ por Jessica Bueno.
+
 
 
