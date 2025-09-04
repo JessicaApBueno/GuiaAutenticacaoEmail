@@ -35,7 +35,7 @@ Tailwind CSS: Para a estilização ágil e responsiva da interface, utilizando c
 
 
 ## 🚀 Como Executar o Projeto Localmente
-Para visualizar o site, acesse o deploy:
+Para visualizar o site, acesse o deploy: https://jessicaapbueno.github.io/GuiaAutenticacaoEmail/
 
 ## 📁 Estrutura do Projeto
 O repositório está organizado da seguinte forma:
@@ -49,4 +49,5 @@ O conteúdo técnico deste guia foi elaborado com base na documentação oficial
 
 ## ✍️ Autora
 Este projeto foi desenvolvido com ❤️ por Jessica Bueno.
+
 
