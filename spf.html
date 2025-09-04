@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Detalhado sobre SPF</title>
+    <!-- Inclusão do Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+     <link rel="icon" type="image/png" href="./midia/Gemini_Generated_Image_g70kyng70kyng70k.png">
+    <link href="/dist/output.css" rel="stylesheet">
+    <script>
+      // Configuração para estender as cores padrão do Tailwind com a minha paleta de cores
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'fundo': '#344973',      // Cor de fundo principal
+              'card': '#030C26',        // Cor de fundo para seções/cards
+              'texto-principal': '#F2EFDF', // Cor do texto principal
+              'destaque': '#607EA6',       // Destaques, subtítulos
+              'titulo': '#9BA7BF'       // Títulos principais e chamativos
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+          }
+        }
+      }
+    </script>
+    <style type="text/tailwindcss">
+        /* Estilos base para uma melhor aparência e legibilidade */
+        @layer base {
+            body {
+                @apply bg-fundo text-texto-principal font-sans leading-relaxed;
+            }
+            h1, h2, h3, h4 {
+                @apply font-bold text-titulo;
+            }
+            strong {
+                @apply font-bold text-destaque;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    
+    <!-- Barra de Navegação Fixa com Logotipo -->
+    <nav class="sticky top-0 z-50 bg-card/90 backdrop-blur-sm border-b border-white/10">
+        <div class="container mx-auto max-w-4xl px-4 flex justify-between items-center py-3">
+            <!-- Logotipo e Link para Home -->
+            <a href="./index.html" class="flex items-center space-x-2.5">
+                <svg class="h-9 w-9" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-3z" fill="#607EA6"/>
+                    <path d="M12 2L3 5v6c0 5.55 3.84 10.74 9 12V2z" fill="#344973"/>
+                    <text x="50%" y="62%" dominant-baseline="middle" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#F2EFDF" font-weight="900">@</text>
+                </svg>
+                <span class="font-bold text-lg text-titulo hidden sm:inline">Guia de Autenticação de E-mails</span>
+            </a>
+            <ul class="flex justify-center items-center space-x-6 md:space-x-10 py-4 text-sm md:text-base">
+                <li><a href="./index.html" class="font-bold text-titulo hover:text-white transition-colors duration-200">HOME</a></li>
+                <li><a href="./dkim.html" class="font-bold text-titulo hover:text-white transition-colors duration-200">DKIM</a></li>
+                <li><a href="./spf.html" class="font-bold text-titulo hover:text-white transition-colors duration-200">SPF</a></li>
+                <li><a href="./dmarc.html" class="font-bold text-titulo hover:text-white transition-colors duration-200">DMARC</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <!-- Container principal para centralizar o conteúdo e aplicar espaçamento responsivo -->
+    <div class="container mx-auto p-4 md:p-8 max-w-4xl">
+
+        <header class="flex flex-col md:flex-row items-center justify-center gap-6 text-center md:text-left mb-12 pt-8">
+    
+    <img src="./midia/Gemini_Generated_Image_g70kyng70kyng70k.png" alt="Logo do Guia de Autenticação de E-mails" class="w-[100px] h-[100px] rounded-full object-cover flex-shrink-0"/>
+    
+    <div>
+            <h1 class="text-4xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-destaque to-titulo">
+                Tudo sobre SPF
+            </h1>
+            <p class="text-texto-principal/70 mt-2">Sender Policy Framework</p>
+    </div>
+        </header>
+
+        <main class="space-y-12">
+             <!-- Seção de Vídeo -->
+            <section class="mt-12">
+                <h2 class="text-3xl text-center font-bold mb-8">
+                    Breve Apresentação 
+                </h2>
+                <div class="bg-card p-2 sm:p-4 rounded-lg shadow-xl ring-1 ring-white/10">
+                    <video controls class="w-full h-[500px] rounded-md">
+                        <source src="./midia/Use_a_female_202509041805_tfol3.mp4" type="video/mp4">
+                        Seu navegador não suporta a tag de vídeo.
+                    </video>
+                </div>
+            </section>
+            
+            <article class="space-y-8">
+                <!-- Seção de Introdução -->
+                <section class="bg-card p-6 md:p-8 rounded-lg shadow-xl ring-1 ring-white/10">
+                    <h2 class="text-2xl border-b-2 border-white/20 pb-3 mb-4">O que é SPF?</h2>
+                    <p class="text-lg">
+                        O <strong>SPF (Sender Policy Framework)</strong> é um método de autenticação de e-mails que ajuda a evitar que os servidores de recebimento marquem seus e-mails enviados como spam. Ele atua impedindo que remetentes falsifiquem sua identidade (spoofing), bloqueando spammers e outros invasores que enviam e-mails que parecem ser da sua organização.
+                    </p>
+                </section>
+
+                <!-- Por que configurar? -->
+                <section class="bg-card p-6 md:p-8 rounded-lg shadow-xl ring-1 ring-white/10">
+                    <h2 class="text-2xl border-b-2 border-white/20 pb-3 mb-4">Por que configurar o SPF?</h2>
+                    <ul class="list-disc list-inside space-y-3 text-texto-principal/80">
+                        <li><strong>Garante a entrega da mensagem:</strong> É fundamental para remetentes de e-mail que enviam para contas pessoais do Gmail, para que as mensagens sejam entregues como esperado.</li>
+                        <li><strong>Proteção contra spoofing:</strong> Ajuda a proteger seu domínio contra a falsificação de identidade, garantindo que as mensagens vêm de servidores autorizados.</li>
+                        <li><strong>Recomendação para todos os remetentes:</strong> Todos os remetentes de e-mail precisam configurar o SPF ou o DKIM. Para remetentes de e-mails em massa (mais de 5.000 mensagens por dia), é obrigatório configurar SPF, DKIM e DMARC. O Google recomenda configurar ambos, SPF e DKIM, para um sinal mais forte de autenticidade.</li>
+                    </ul>
+                </section>
+
+                <!-- Como funciona? -->
+                <section class="bg-card p-6 md:p-8 rounded-lg shadow-xl ring-1 ring-white/10">
+                    <h2 class="text-2xl border-b-2 border-white/20 pb-3 mb-4">Como o SPF funciona?</h2>
+                    <p class="mb-4 text-texto-principal/80">A configuração do SPF envolve a adição de um registro TXT do SPF (registro SPF) ao seu domínio.</p>
+                    <ul class="list-disc list-inside space-y-3 mb-6 text-texto-principal/80">
+                        <li>Um registro SPF é uma linha de texto que você adiciona ao seu domínio. Essa linha utiliza uma sintaxe especial e lista todos os servidores que estão autorizados a enviar e-mails para ou em nome do seu domínio.</li>
+                        <li>Quando um servidor de recebimento de e-mail recebe uma mensagem do seu domínio, ele verifica o registro SPF para confirmar se a mensagem realmente veio de um dos servidores autorizados listados.</li>
+                        <li>Se o servidor remetente não estiver na lista, a mensagem pode ser marcada como spam.</li>
+                    </ul>
+                    <h4 class="text-lg text-destaque mb-2">Exemplo de registro SPF:</h4>
+                    <p class="text-texto-principal/80 mb-2">Um exemplo comum de registro SPF para quem usa apenas o Google Workspace é:</p>
+                    <code class="block bg-fundo p-3 rounded-md text-texto-principal/90 text-sm font-mono">v=spf1 include:_spf.google.com ~all</code>
+                </section>
+                
+                <!-- Etapas para configurar -->
+                <section class="bg-card p-6 md:p-8 rounded-lg shadow-xl ring-1 ring-white/10">
+                    <h2 class="text-2xl border-b-2 border-white/20 pb-3 mb-4">Etapas para configurar o SPF</h2>
+                    <ol class="list-decimal list-inside space-y-4 text-texto-principal/80">
+                        <li>
+                            <strong>Identificar todos os remetentes de e-mail:</strong> Seu registro SPF precisa incluir os domínios (ou endereços IP) de todos os servidores que enviam e-mails para sua organização. Isso pode incluir:
+                            <ul class="list-disc list-inside mt-2 ml-4 space-y-1">
+                                <li>Servidores da Web</li>
+                                <li>Servidores de e-mail no local (como Microsoft Exchange)</li>
+                                <li>Servidores de e-mail de seu provedor de serviços</li>
+                                <li>Gateways de saída</li>
+                                <li>Serviços que enviam e-mails automáticos (como formulários de contato)</li>
+                                <li>Qualquer provedor ou serviço de terceiros que envie e-mails do seu domínio. Pode ser necessário consultar o administrador do site ou serviços de terceiros para obter essas informações.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Determinar seu registro SPF:</strong> Após identificar todos os remetentes, você cria a string de texto do registro SPF.
+                             <ul class="list-disc list-inside mt-2 ml-4 space-y-1">
+                                <li>Se você usa apenas o Google Workspace para enviar e-mails, o registro é <code class="text-xs bg-fundo p-1 rounded">v=spf1 include:_spf.google.com ~all</code>.</li>
+                                <li>Se você usa outros serviços em conjunto com o Google Workspace (como Amazon, GoDaddy, Mailchimp, Office 365, Salesforce, Shopify ou Zendesk), os fontes fornecem exemplos de registros SPF combinados que você pode usar como guia.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Adicionar o registro SPF ao seu domínio:</strong> Esta etapa é realizada no host do seu domínio (onde você comprou o nome do domínio), não no Google Admin Console.
+                             <ul class="list-disc list-inside mt-2 ml-4 space-y-2">
+                                <li>Faça login no site do seu host de domínio.</li>
+                                <li>Acesse a página de atualização dos registros TXT do DNS do seu domínio.</li>
+                                <li>Adicione ou atualize um registro TXT com as seguintes informações:
+                                    <ul class="list-['-_'] list-inside mt-2 ml-6 space-y-1">
+                                        <li><strong>Tipo:</strong> TXT</li>
+                                        <li><strong>Host (nome, nome de host ou alias):</strong> Se for o domínio principal, especifique @. Caso contrário, use o nome do seu domínio (por exemplo, example.com).</li>
+                                        <li><strong>Valor:</strong> Insira o registro SPF determinado na Etapa 2. Alguns domínios podem exigir que a string do registro SPF seja incluída entre aspas.</li>
+                                    </ul>
+                                </li>
+                                <li>Salve as alterações. Se você usa subdomínios, adicione um registro SPF para cada um. Se estiver configurando para vários domínios, cada um precisa ter seu próprio registro SPF.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </section>
+                
+                <!-- Considerações importantes -->
+                 <section class="bg-card p-6 md:p-8 rounded-lg shadow-xl ring-1 ring-white/10">
+                    <h2 class="text-2xl border-b-2 border-white/20 pb-3 mb-4">Considerações importantes</h2>
+                    <ul class="list-disc list-inside space-y-3 mb-4 text-texto-principal/80">
+                        <li>A autenticação pelo SPF pode levar até 48 horas para começar a funcionar.</li>
+                        <li>Mantenha seu registro SPF atualizado: Se você começar a usar um novo servidor de e-mail ou remetente terceirizado, atualize seu registro SPF para incluir os novos remetentes. Caso contrário, as mensagens enviadas por eles poderão ser marcadas como spam.</li>
+                        <li>Remova do registro SPF quaisquer domínios ou endereços IP que você não usa mais para enviar e-mails.</li>
+                        <li>O Google recomenda que você também configure a autenticação DKIM e DMARC para sua organização, pois remetentes de e-mails em massa precisam dos três. O DMARC, em particular, informa aos servidores de e-mail o que fazer com mensagens que não passam nas verificações de SPF ou DKIM e oferece relatórios úteis.</li>
+                        <li>Você pode usar ferramentas gratuitas online para verificar se o SPF já está configurado para seu domínio.</li>
+                    </ul>
+                </section>
+            </article>
+
+        </main>
+        
+    </div>
+
+    <footer class="bg-card border-t border-white/10 mt-12">
+        <div class="container mx-auto max-w-4xl p-4">
+             <p class="text-center text-sm text-texto-principal/70">&copy; 2025 Guia de Autenticação de e-mails. Todos os direitos reservados.</p>
+             <p class="text-center text-sm text-texto-principal/70">&hearts; Desenvolvido por Jessica Bueno &hearts;</p><br>
+
+              <p class="text-center text-sm text-texto-principal/70"> Este guia tem como Referência a documentação oficial do Google <br>
+            Para consultar a documentação oficial:<a class="text-titulo hover:text-white transition-colors duration-200" href="https://support.google.com/a/answer/10583557?hl=pt-BR&ref_topic=9061731&sjid=14195913030109293890-SA"> Clique Aqui</a></p>
+              
+        </div>
+    </footer>
+
+</body>
+</html>
